@@ -1,0 +1,6 @@
+@FilRougeAPI_HostAddress = http://localhost:5053
+
+GET {{FilRougeAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
