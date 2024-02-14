@@ -1,0 +1,62 @@
+<h2>Domaines</h2>
+<div class="sort-header">
+  <!-- <ng-container class="tutorial-container" *ngIf="adresses | async as tutorials; else noTutorials" appHoverHighlight> -->
+    <ng-container  *ngIf="domaines$ | async as domaines; else noDomaines" appHoverHighlight>
+    <div *ngFor="let domaine of domaines">
+      <div>
+        <p>{{domaine.id}}</p>
+        <p>{{domaine.nom}}</p>
+        <p>{{domaine.description}}</p>
+        <button (click)="deleteDomaine(domaine.id)"> Suprimer Domaine </button>    
+      </div>
+    </div>
+  </ng-container>
+</div>  
+
+<h2> Ajouter/Modifier un Domaine </h2>
+
+<div>
+  <form class="form-container" [formGroup]="domaineForm" #formDir="ngForm">
+    <div>
+      <div> Nom : </div>
+      <input formControlName="nom" required>
+      <div *ngIf="nom != null && nom.invalid && (nom.dirty || nom.touched)">
+        <span *ngIf="nom.errors?.['required']">Le nom n'est pas indiqué.</span>
+        <span *ngIf="nom.errors?.['minlength']">Le nom doit contenir au moins 2 caractères. </span>
+      </div>
+    </div>
+         
+    <div>
+      <div> Description : </div>
+      <input formControlName="description" required>
+       <!-- error message -->
+       <div  *ngIf="description != null && description.invalid && (description.dirty || description.touched)">
+        <span *ngIf="description.errors?.['required']">La description n'est pas indiqué.</span>
+        <span *ngIf="description.errors?.['minlength']">La description doit contenir au moins 2 caractères. </span>
+      </div>
+    </div>
+
+    <div>
+      <button (click)="addDomaine()"  [disabled]="domaineForm.invalid"> Ajouter un Domaine </button>
+    </div>
+  </form>
+  
+  <div class="edit-container">
+    <div>
+      <label for="id"> Choisir un ID :  </label>
+      <select  [(ngModel)]="idEdit" id="idEdit">
+        <option *ngFor="let id of domaineIds" [value]="id">{{ id }}</option>
+      </select>
+    </div>
+    <div>
+      <button (click)="editDomaine(idEdit)" [disabled]="domaineForm.invalid"> Modifier un domaine </button>
+    </div>
+ </div>
+
+
+</div>
+
+<ng-template #noDomaines>
+  <p> Pas de domaine trouvés </p>
+</ng-template>
+

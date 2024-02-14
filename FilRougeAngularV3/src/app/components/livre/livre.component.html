@@ -1,0 +1,106 @@
+<h2>Livres</h2>
+<div class="sort-header">
+  <!-- <ng-container class="tutorial-container" *ngIf="adresses | async as tutorials; else noTutorials" appHoverHighlight> -->
+    <ng-container  *ngIf="livres$ | async as livres; else noLivres" appHoverHighlight>
+    <div *ngFor="let livre of livres">
+      <div>
+        <p>{{livre.id}}</p>
+        <p>{{livre.titre}}</p>
+        <p>{{livre.nombrePages}}</p>
+        <p>{{livre.statutDuLivre}}</p>
+        <p>{{livre.etatDuLivre}}</p>
+        <p>{{livre.auteurId}}</p>
+        <p>{{livre.domaineId}}</p>
+        <button (click)="deleteLivre(livre.id)"> Suprimer Livre </button>    
+      </div>
+    </div>
+  </ng-container>
+</div>  
+
+<h2> Ajouter/Modifier un Livre </h2>
+
+<div>
+  <form class="form-container" [formGroup]="livreForm" #formDir="ngForm">
+
+    <div>
+        <div> Titre : </div>
+        <input formControlName="titre" required>
+        <div *ngIf="titre != null && titre.invalid && (titre.dirty || titre.touched)">
+          <span *ngIf="titre.errors?.['required']">Le titre n'est pas indiqué.</span>
+          <span *ngIf="titre.errors?.['minlength']">Le titre doit contenir au moins 2 caractères. </span>
+        </div>
+    </div>
+
+    <div>
+      <div> Nombre de Pages : </div>
+      <input formControlName="nombrePages" required>
+      <div *ngIf="nombrePages != null && nombrePages.invalid && (nombrePages.dirty || nombrePages.touched)">
+        <span *ngIf="nombrePages.errors?.['required']">Le nombrePages n'est pas indiqué.</span>
+        <span *ngIf="nombrePages.errors?.['minlength']">Le nombrePages doit contenir au moins 2 caractères. </span>
+      </div>
+    </div>
+         
+    
+    <div>
+        <div> Statut du Livre : </div>
+        <input formControlName="statutDuLivre" required>
+        <div *ngIf="statutDuLivre != null && statutDuLivre.invalid && (statutDuLivre.dirty || statutDuLivre.touched)">
+          <span *ngIf="statutDuLivre.errors?.['required']">Le statutDuLivre n'est pas indiqué.</span>
+          <span *ngIf="statutDuLivre.errors?.['minlength']">Le statutDuLivre doit contenir au moins 2 caractères. </span>
+        </div>
+    </div>
+
+
+    <div>
+        <div> Etat du Livre : </div>
+        <input formControlName="etatDuLivre" required>
+        <div *ngIf="etatDuLivre!= null && etatDuLivre.invalid && (etatDuLivre.dirty || etatDuLivre.touched)">
+          <span *ngIf="etatDuLivre.errors?.['required']">Le etatDuLivren'est pas indiqué.</span>
+          <span *ngIf="etatDuLivre.errors?.['minlength']">Le etatDuLivredoit contenir au moins 2 caractères. </span>
+        </div>
+    </div>
+
+    <div>
+        <div> Auteur Id: </div>
+        <input formControlName="auteurId" required>
+        <div *ngIf="auteurId!= null && auteurId.invalid && (auteurId.dirty || auteurId.touched)">
+          <span *ngIf="auteurId.errors?.['required']">Le auteurIdn'est pas indiqué.</span>
+          <span *ngIf="auteurId.errors?.['minlength']">Le auteurIddoit contenir au moins 2 caractères. </span>
+        </div>
+    </div>
+
+
+    <div>
+        <div> Domaine Id : </div>
+        <input formControlName="domaineId" required>
+        <div *ngIf="domaineId!= null && domaineId.invalid && (domaineId.dirty || domaineId.touched)">
+          <span *ngIf="domaineId.errors?.['required']">Le domaineIdn'est pas indiqué.</span>
+          <span *ngIf="domaineId.errors?.['minlength']">Le domaineIddoit contenir au moins 2 caractères. </span>
+        </div>
+    </div>
+
+
+    <div>
+      <button (click)="addLivre()"  [disabled]="livreForm.invalid"> Ajouter un Livre </button>
+    </div>
+
+  </form>
+  
+  <div class="edit-container">
+    <div>
+      <label for="id"> Choisir un ID :  </label>
+      <select  [(ngModel)]="idEdit" id="idEdit">
+        <option *ngFor="let id of livreIds" [value]="id">{{ id }}</option>
+      </select>
+    </div>
+    <div>
+      <button (click)="editLivre(idEdit)" [disabled]="livreForm.invalid"> Modifier un Livre </button>
+    </div>
+ </div>
+
+
+</div>
+
+<ng-template #noLivres>
+  <p> Pas de Livre trouvés </p>
+</ng-template>

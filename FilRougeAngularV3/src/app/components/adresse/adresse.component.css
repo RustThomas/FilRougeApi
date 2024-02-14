@@ -1,0 +1,115 @@
+/* Style pour les en-têtes de section */
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-left: 10px;
+}
+  
+  /* Style du bouton */
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Style du bouton quand il est désactivé */
+  button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+/* Style pour le conteneur des adresses */
+.sort-header {
+    margin-top: 20px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: left;
+}
+  
+  /* Style pour chaque adresse */
+  .sort-header div {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+  
+  /* Style pour les boutons Supprimer Adresses */
+  .sort-header button {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+  .sort-header button:hover {
+    background-color: #cc0000;
+  }
+
+  /* Style pour le conteneur principal */
+  .form-container {
+    width: 300px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Style pour chaque élément du formulaire */
+  .form-container div {
+    margin-bottom: 20px;
+  }
+  
+  /* Style pour les labels */
+  .form-container div > div {
+    font-weight: bold;
+  }
+  
+  /* Style pour les champs de saisie */
+  .form-container input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Style pour les messages d'erreur */
+  .form-container div > div + div {
+    color: #ff0000;
+    font-size: 14px;
+  }
+
+  /* Style du conteneur principal */
+
+
+.edit-container {
+    margin-top: 10px;
+    width: 300px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style du label */
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Style de la sélection */
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+

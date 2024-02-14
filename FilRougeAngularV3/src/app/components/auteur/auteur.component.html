@@ -1,0 +1,105 @@
+<h2>Auteurs</h2>
+<div class="sort-header">
+  <!-- <ng-container class="tutorial-container" *ngIf="adresses | async as tutorials; else noTutorials" appHoverHighlight> -->
+    <ng-container  *ngIf="Auteurs$ | async as Auteur; else noAuteurs" appHoverHighlight>
+    <div *ngFor="let Auteur of auteurs">
+      <div>
+        <p>{{Auteur.id}}</p>
+        <p>{{Auteur.nom}}</p>
+        <p>{{Auteur.prenom}}</p>
+        <p>{{Auteur.email}}</p>
+        <p>{{Auteur.telephone}}</p>
+        <p>{{Auteur.grade}}</p>
+        <p>{{Auteur.fullName}}</p>
+        <button (click)="deleteAuteur(Auteur.id)"> Suprimer Auteur </button>    
+      </div>
+    </div>
+  </ng-container>
+</div>  
+
+<h2> Ajouter/Modifier un Auteur </h2>
+
+<div>
+  <form class="form-container" [formGroup]="auteurForm" #formDir="ngForm">
+    <div>
+      <div> Nom : </div>
+      <input formControlName="nom" required>
+      <div *ngIf="nom != null && nom.invalid && (nom.dirty || nom.touched)">
+        <span *ngIf="nom.errors?.['required']">Le nom n'est pas indiqué.</span>
+        <span *ngIf="nom.errors?.['minlength']">Le nom doit contenir au moins 2 caractères. </span>
+      </div>
+    </div>
+         
+    <div>
+        <div> Prenom : </div>
+        <input formControlName="prenom" required>
+        <div *ngIf="prenom != null && prenom.invalid && (prenom.dirty || prenom.touched)">
+          <span *ngIf="prenom.errors?.['required']">Le prenom n'est pas indiqué.</span>
+          <span *ngIf="prenom.errors?.['minlength']">Le prenom doit contenir au moins 2 caractères. </span>
+        </div>
+    </div>
+
+
+    <div>
+        <div> Telephone : </div>
+        <input formControlName="telephone" required>
+        <div *ngIf="telephone != null && telephone.invalid && (telephone.dirty || telephone.touched)">
+          <span *ngIf="telephone.errors?.['required']">Le telephone n'est pas indiqué.</span>
+          <span *ngIf="telephone.errors?.['minlength']">Le telephone doit contenir au moins 2 caractères. </span>
+        </div>
+    </div>
+
+
+    <div>
+        <div> Email : </div>
+        <input formControlName="email" required>
+        <div *ngIf="email != null && email.invalid && (email.dirty || email.touched)">
+          <span *ngIf="email.errors?.['required']">Le email n'est pas indiqué.</span>
+          <span *ngIf="email.errors?.['minlength']">Le email doit contenir au moins 2 caractères. </span>
+        </div>
+    </div>
+
+    <div>
+        <div> Grade : </div>
+        <input formControlName="grade" required>
+        <div *ngIf="grade != null && grade.invalid && (grade.dirty || grade.touched)">
+          <span *ngIf="grade.errors?.['required']">Le grade n'est pas indiqué.</span>
+          <span *ngIf="grade.errors?.['minlength']">Le grade doit contenir au moins 2 caractères. </span>
+        </div>
+    </div>
+
+
+    <div>
+        <div> Fullname: </div>
+        <input formControlName="fullname" required>
+        <div *ngIf="fullname!= null && fullname.invalid && (fullname.dirty || fullname.touched)">
+          <span *ngIf="fullname.errors?.['required']">Le fullnamen'est pas indiqué.</span>
+          <span *ngIf="fullname.errors?.['minlength']">Le fullnamedoit contenir au moins 2 caractères. </span>
+        </div>
+    </div>
+
+
+    <div>
+      <button (click)="addAuteur()"  [disabled]="auteurForm.invalid"> Ajouter un Auteur </button>
+    </div>
+
+  </form>
+  
+  <div class="edit-container">
+    <div>
+      <label for="id"> Choisir un ID :  </label>
+      <select  [(ngModel)]="idEdit" id="idEdit">
+        <option *ngFor="let id of auteurIds" [value]="id">{{ id }}</option>
+      </select>
+    </div>
+    <div>
+      <button (click)="editAuteur(idEdit)" [disabled]="auteurForm.invalid"> Modifier un Auteur </button>
+    </div>
+ </div>
+
+
+</div>
+
+<ng-template #noAuteurs>
+  <p> Pas de Auteur trouvés </p>
+</ng-template>

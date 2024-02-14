@@ -1,0 +1,92 @@
+<h2>Adresses</h2>
+<div class="sort-header">
+  <!-- <ng-container class="tutorial-container" *ngIf="adresses | async as tutorials; else noTutorials" appHoverHighlight> -->
+    <ng-container  *ngIf="adresses$ | async as adresses; else noAdresses" appHoverHighlight>
+    <div *ngFor="let adress of adresses">
+      <div>
+        <p>{{adress.id}}</p>
+        <p>{{adress.appartement}}</p>
+        <p>{{adress.rue}}</p>
+        <p>{{adress.codePostal}}</p>
+        <p>{{adress.ville}}</p>
+        <p>{{adress.pays}}</p>
+        <button (click)="deleteAdresse(adress.id)"> Suprimer Adresses </button>    
+      </div>
+  
+    </div>
+  </ng-container>
+</div>  
+
+<h2> Ajouter/Modifier une Adresse</h2>
+
+<div>
+  <form class="form-container" [formGroup]="adresseForm" #formDir="ngForm">
+    <div>
+      <div> Appartement : </div>
+      <input formControlName="appartement" required>
+      <div *ngIf="appartement != null && appartement.invalid && (appartement.dirty || appartement.touched)">
+        <span *ngIf="appartement.errors?.['required']">L'Appartement n'est pas indiqué.</span>
+        <span *ngIf="appartement.errors?.['minlength']">L'appartement doit contenir au moins 2 caractères. </span>
+      </div>
+    </div>
+         
+    <div>
+      <div> Rue : </div>
+      <input formControlName="rue" required>
+       <!-- error message -->
+       <div  *ngIf="rue != null && rue.invalid && (rue.dirty || rue.touched)">
+        <span *ngIf="rue.errors?.['required']">L'rue n'est pas indiqué.</span>
+        <span *ngIf="rue.errors?.['minlength']">L'rue doit contenir au moins 2 caractères. </span>
+      </div>
+    </div>
+
+    <div>
+      <div> Ville: </div>
+      <input formControlName="ville" required>
+      <div  *ngIf="ville != null && ville.invalid && (ville.dirty || ville.touched)">
+        <span *ngIf="ville.errors?.['required']">L'ville n'est pas indiqué.</span>
+        <span *ngIf="ville.errors?.['minlength']">L'ville doit contenir au moins 2 caractères. </span>
+      </div>
+    </div>
+
+    <div>
+      <div> CodePostal: </div>
+      <input formControlName="codePostal" required>
+      <div  *ngIf="codePostal != null && codePostal.invalid && (codePostal.dirty || codePostal.touched)">
+        <span *ngIf="codePostal.errors?.['required']">L'codePostal n'est pas indiqué.</span>
+        <span *ngIf="codePostal.errors?.['minlength']">L'codePostal doit contenir au moins 2 caractères. </span>
+      </div>
+    </div>
+
+    <div>
+      <div> Pays: </div>
+      <input formControlName="pays" required>
+      <div  *ngIf="pays != null && pays.invalid && (pays.dirty || pays.touched)">
+        <span *ngIf="pays.errors?.['required']">L'pays n'est pas indiqué.</span>
+        <span *ngIf="pays.errors?.['minlength']">L'pays doit contenir au moins 2 caractères. </span>
+      </div>
+    </div>
+
+    <div>
+      <button (click)="addAdresse()"  [disabled]="adresseForm.invalid"> Ajouter Adresse </button>
+    </div>
+  </form>
+  
+  <div class="edit-container">
+    <div>
+      <label for="id"> Choisir un ID :  </label>
+      <select  [(ngModel)]="idEdit" id="idEdit">
+        <option *ngFor="let id of ids" [value]="id">{{ id }}</option>
+      </select>
+    </div>
+    <div>
+      <button (click)="editAdresse(idEdit)" [disabled]="adresseForm.invalid">Modifier une Adresse</button>
+    </div>
+ </div>
+
+
+</div>
+
+<ng-template #noAdresses>
+  <p> Pas d'adresses trouvées</p>
+</ng-template>
